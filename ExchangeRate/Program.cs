@@ -6,8 +6,6 @@ namespace ExchangeRate
     {
         static void Main(string[] args)
         {
-            decimal azn;
-
             string codeUsd = "USD";
             decimal rateUsd = 1.7M;
 
