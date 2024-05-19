@@ -6,15 +6,8 @@ namespace ExchangeRate
     {
         static void Main(string[] args)
         {
-            string codeUsd = "USD";
-            decimal rateUsd = 1.7M;
-
-            string codeRub = "RUB";
-            decimal rateRub = 0.0187M;
-
-            string codeTry = "TRY";
-            decimal rateTry = 0.0527M;
-
+            string[] currencyCodes = { "USD", "RUB", "TRY" };
+            decimal[] currencyRates = { 1.7M, 0.0187M, 0.0527M };
 
             while (true)
             {
@@ -23,10 +16,12 @@ namespace ExchangeRate
 
                 if (command == "/show-recent-currency-rates")
                 {
-                    Console.WriteLine(codeUsd + ": " + rateUsd);
-                    Console.WriteLine(codeRub + ": " + rateRub);
-                    Console.WriteLine(codeTry + ": " + rateTry);
-
+                    int idx = 0;
+                    while (idx < currencyRates.Length)
+                    {
+                        Console.WriteLine(currencyCodes[idx] + ": " + currencyRates[idx]);
+                        idx++;
+                    }
                 }
 
                 else if (command == "/find-currency-rate-by-code")
@@ -35,17 +30,17 @@ namespace ExchangeRate
                     string code = Console.ReadLine();
 
 
-                    if (code == codeUsd)
+                    if (code == currencyCodes[0])
                     {
-                        Console.WriteLine(codeUsd + ": " + rateUsd);
+                        Console.WriteLine(currencyCodes[0] + ": " + currencyRates[0]);
                     }
-                    else if (code == codeRub)
+                    else if (code == currencyCodes[1])
                     {
-                        Console.WriteLine(codeRub + ": " + rateRub);
+                        Console.WriteLine(currencyCodes[1] + ": " + currencyRates[1]);
                     }
-                    else if (code == codeTry)
+                    else if (code == currencyCodes[2])
                     {
-                        Console.WriteLine(codeTry + ": " + rateTry);
+                        Console.WriteLine(currencyCodes[2] + ": " + currencyCodes[2]);
                     }
                     else
                     {
@@ -54,39 +49,54 @@ namespace ExchangeRate
                 }
                 else if (command == "/calculate-amount-by-currency")
                 {
-                    Console.WriteLine("Enter amount: ");
-                    decimal amount = decimal.Parse(Console.ReadLine());
+                    while (true)
+                    {
+                        Console.WriteLine("Enter amount: ");
+                        if (!decimal.TryParse(Console.ReadLine(), out decimal amount))
+                        {
+                            Console.WriteLine("Invalid input");
+                            continue;
+                        }
 
-                    Console.WriteLine("Enter currency rate: ");
-                    string code = Console.ReadLine();
+                        Console.WriteLine("Enter currency rate: ");
+                        string code = Console.ReadLine();
 
-                    if (code == codeUsd)
-                    {
-                        decimal result = amount * rateUsd;
-                        Console.WriteLine(result + "AZN");
-                    }
-                    else if (code == codeRub)
-                    {
-                        decimal result = amount * rateRub;
-                        Console.WriteLine(result + "AZN");
-                    }
-                    else if (code == codeTry)
-                    {
-                        decimal result = amount * rateTry;
-                        Console.WriteLine(result + "AZN");
-                    }
-                    else
-                    {
-                        Console.WriteLine("No such currency");
+                        if (code == currencyCodes[0])
+                        {
+                            decimal result = amount * currencyRates[0];
+                            Console.WriteLine(result + "AZN");
+                        }
+                        else if (code == currencyCodes[1])
+                        {
+                            decimal result = amount * currencyRates[1];
+                            Console.WriteLine(result + "AZN");
+                        }
+                        else if (code == currencyCodes[2])
+                        {
+                            decimal result = amount * currencyRates[2];
+                            Console.WriteLine(result + "AZN");
+                        }
+                        else
+                        {
+                            Console.WriteLine("No such currency");
+                        }
                     }
                 }
-                else if(command == "/exit")
+                else if (command == "/exit")
                 {
                     break;
                 }
+                else
+                {
+                    Console.WriteLine("Unknown command. Available commands:");
+                    Console.WriteLine("/show-recent-currency-rates");
+                    Console.WriteLine("/find-currency-rate-by-code");
+                    Console.WriteLine("/calculate-amount-by-currency");
+                    Console.WriteLine("/exit");
+                }
             }
-
-
         }
+
+
     }
 }
