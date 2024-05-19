@@ -10,10 +10,10 @@ namespace ExchangeRate
             decimal rateUsd = 1.7M;
 
             string codeRub = "RUB";
-            decimal rateRub = 0.022M;
+            decimal rateRub = 0.0187M;
 
             string codeTry = "TRY";
-            decimal rateTry = 0.23M;
+            decimal rateTry = 0.0527M;
 
 
             while (true)
@@ -28,7 +28,7 @@ namespace ExchangeRate
                     Console.WriteLine(codeTry + ": " + rateTry);
 
                 }
-                
+
                 else if (command == "/find-currency-rate-by-code")
                 {
                     Console.WriteLine("Enter currency rate: ");
@@ -51,6 +51,38 @@ namespace ExchangeRate
                     {
                         Console.WriteLine("No such currency");
                     }
+                }
+                else if (command == "/calculate-amount-by-currency")
+                {
+                    Console.WriteLine("Enter amount: ");
+                    decimal amount = decimal.Parse(Console.ReadLine());
+
+                    Console.WriteLine("Enter currency rate: ");
+                    string code = Console.ReadLine();
+
+                    if (code == codeUsd)
+                    {
+                        decimal result = amount * rateUsd;
+                        Console.WriteLine(result + "AZN");
+                    }
+                    else if (code == codeRub)
+                    {
+                        decimal result = amount * rateRub;
+                        Console.WriteLine(result + "AZN");
+                    }
+                    else if (code == codeTry)
+                    {
+                        decimal result = amount * rateTry;
+                        Console.WriteLine(result + "AZN");
+                    }
+                    else
+                    {
+                        Console.WriteLine("No such currency");
+                    }
+                }
+                else if(command == "/exit")
+                {
+                    break;
                 }
             }
 
