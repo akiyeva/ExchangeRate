@@ -28,6 +28,30 @@ namespace ExchangeRate
                     Console.WriteLine(codeTry + ": " + rateTry);
 
                 }
+                
+                else if (command == "/find-currency-rate-by-code")
+                {
+                    Console.WriteLine("Enter currency rate: ");
+                    string code = Console.ReadLine();
+
+
+                    if (code == codeUsd)
+                    {
+                        Console.WriteLine(codeUsd + ": " + rateUsd);
+                    }
+                    else if (code == codeRub)
+                    {
+                        Console.WriteLine(codeRub + ": " + rateRub);
+                    }
+                    else if (code == codeTry)
+                    {
+                        Console.WriteLine(codeTry + ": " + rateTry);
+                    }
+                    else
+                    {
+                        Console.WriteLine("No such currency");
+                    }
+                }
             }
 
 
